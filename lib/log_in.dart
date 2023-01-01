@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +7,17 @@ class LogIn extends StatefulWidget {
 
   @override
   State<LogIn> createState() => _LogIn();
+
+ 
 }
 
 class _LogIn extends State<LogIn> {
   get child => null;
+  // bool val = true;
+  bool valuefirst = false;  
+  bool valuesecond = false;  
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("RoozShop App")),
@@ -19,7 +25,7 @@ class _LogIn extends State<LogIn> {
         
         child: Column(
         
-         children: const <Widget>[
+         children:  <Widget>[
 
             Padding(padding: EdgeInsets.all(20),
             child:
@@ -39,14 +45,10 @@ class _LogIn extends State<LogIn> {
                   hintText: 'Enter your username',
                
                 ),
-                // onSubmitted: (String value){
-                //   debugPrint(value);
-                // },
-                // controller: _controller,
-                // onSubmitted: (String value) {
-                //   debugPrint(value);
-                // },
-                           ),),
+                onSubmitted: (String value){
+                  debugPrint(value);
+                },
+             ),),
 
 
         Padding(padding: EdgeInsets.all(20),
@@ -54,10 +56,7 @@ class _LogIn extends State<LogIn> {
                TextField(
                
                 decoration:  InputDecoration(
-                    // border:  OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(6)),
-
-                  focusedBorder: OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                     // borderRadius: BorderRadius.circular(20),
                                     
                     borderSide: BorderSide(color: Colors.green, width: 2.0 ),
@@ -72,37 +71,46 @@ class _LogIn extends State<LogIn> {
                   hintText: 'Enter your password',
                
                 ),
-                // onSubmitted: (String value){
-                //   debugPrint(value);
-                // },
-                // controller: _controller,
-                // onSubmitted: (String value) {
-                //   debugPrint(value);
-                // },
+                onSubmitted: (String value){
+                  debugPrint(value);
+                },
+                
                            ),),
 
-         ElevatedButton(onPressed: (){
-          print('mahsa'),
+              ElevatedButton(onPressed: (){}, child: Text('log in') ,),
 
+              Row(children: <Widget>[
+                Padding(padding: EdgeInsets.all(20)),
+                 Checkbox(  
+                    
+                     checkColor: Colors.greenAccent,  
+                      activeColor: Colors.red,  
+                      value: this.valuefirst,  
+                      onChanged: (bool? value)  {  
+                        setState(() {  
+                          this.valuefirst = value!;  
+                        });
+                        } ),
+                        Text('Remember mw?'),
+                        Padding(padding: EdgeInsets.all(40),
+                        child:Text('Not Registered?')
+                        ),
+                        
+],)
 
-              } , child: Text('Log in')),
+                
+             
 
+             
 
-
-
+              
 
          ],
-
-
 
         ),
 
 
-
-
-
       ),
-
 
 
 
