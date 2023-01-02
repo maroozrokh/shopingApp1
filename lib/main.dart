@@ -1,4 +1,5 @@
 import 'package:first_pro/log_in.dart';
+import 'package:first_pro/registration.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const LogIn(),
+      home: const Registration(),
     );
   }
 }

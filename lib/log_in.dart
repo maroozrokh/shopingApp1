@@ -1,5 +1,6 @@
 
-import 'package:flutter/cupertino.dart';
+import 'package:first_pro/MyHomePage.dart';
+import 'package:first_pro/registration.dart';
 import 'package:flutter/material.dart';
 
 class LogIn extends StatefulWidget {
@@ -77,7 +78,13 @@ class _LogIn extends State<LogIn> {
                 
                            ),),
 
-              ElevatedButton(onPressed: (){}, child: Text('log in') ,),
+              ElevatedButton(onPressed: (){
+                print("mahsa");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  Registration()),
+                  );
+              }, child: Text('log in') ,),
 
               Row(children: <Widget>[
                 Padding(padding: EdgeInsets.all(20)),
@@ -93,7 +100,7 @@ class _LogIn extends State<LogIn> {
                         } ),
                         Text('Remember mw?'),
                         Padding(padding: EdgeInsets.all(40),
-                        child:Text('Not Registered?')
+                        child:Text('Not Registered?' )
                         ),
                         
 ],)
