@@ -13,10 +13,19 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogIn extends State<LogIn> {
-  get child => null;
+  
   // bool val = true;
   bool valuefirst = false;  
   bool valuesecond = false;  
+  bool changeTextFieldStyle = false;
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    myController.dispose();
+    super.dispose();
+  }
 
    @override
   Widget build(BuildContext context) {
@@ -31,15 +40,16 @@ class _LogIn extends State<LogIn> {
             Padding(padding: EdgeInsets.all(20),
             child:
                TextField(
+                controller: myController,
                
                 decoration:  InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     // borderRadius:  BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.green, width: 2.0),
+                    borderSide:  BorderSide(color: Colors.green, width: 2.0),
                     
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                    borderSide:changeTextFieldStyle ? BorderSide(color: Colors.red, width: 2.0) :BorderSide(color: Colors.blue, width: 2.0),
                     
                   ),
                   
@@ -78,12 +88,60 @@ class _LogIn extends State<LogIn> {
                 
                            ),),
 
+              Padding(padding: EdgeInsets.all(20),
+            child:
+               TextField(
+               
+                decoration:  InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(20),
+                                    
+                    borderSide: BorderSide(color: Colors.green, width: 2.0 ),
+                    
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                    
+                  ),
+                
+                  
+                  hintText: 'Enter your Repassword',
+               
+                ),
+                onSubmitted: (String value){
+                  debugPrint(value);
+                },
+                
+                ),),
+
               ElevatedButton(onPressed: (){
-                print("mahsa");
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  Registration()),
-                  );
+                setState(() {
+                  print(myController.text);
+
+                    RegExp  emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[yahoo||gmail]+\.[com]+");
+                    bool match = emailValid.hasMatch(myController.text);
+                    if(!match ){
+                      if(changeTextFieldStyle==false){
+                      changeTextFieldStyle = true;
+
+                      }else{
+                        changeTextFieldStyle = false;
+                      }
+
+                    }else{
+                      print('object');
+
+
+                    }
+                  
+
+
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) =>  Registration()),
+                  // );
+                });
+                
               }, child: Text('log in') ,),
 
               Row(children: <Widget>[

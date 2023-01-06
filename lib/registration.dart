@@ -15,6 +15,63 @@ class _Registration extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> registerTextNameList = ['Username: ','Password: ','Email: ','Phone: ','Address: ' ];
+
+    void myRegistElement(List myList,int index){
+
+
+          Row(
+            children: [
+               Expanded(child:
+              Padding(padding: EdgeInsets.fromLTRB(50,20,10,20),
+                     child:   Text(myList[index])            )
+              
+              ), 
+              
+              Expanded(child:
+              Padding(padding: EdgeInsets.fromLTRB(0, 20, 5, 20),
+                     child:   
+                     TextField(
+               
+                decoration:  InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(50),
+                    borderSide: BorderSide(color: Colors.green, width: 2.0),
+                    
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                      borderRadius:  BorderRadius.circular(50),
+                    
+                  ),
+                  
+                 
+               
+                ),
+                onSubmitted: (String value){
+                  debugPrint(value);
+                },
+             ),
+                     
+                                 )
+              
+              ),
+
+                 
+
+
+
+          ],);
+
+
+
+
+          
+
+
+
+
+    }
 
 
 
@@ -25,6 +82,11 @@ class _Registration extends State<Registration> {
       body:
       Column(
         children:[
+          // Container(
+//       child:   myRegistElement(registerTextNameList,0)
+//  ,
+//           ),
+          
 
           Row(
             children: [
