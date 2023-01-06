@@ -25,9 +25,47 @@ class _LogIn extends State<LogIn> {
   bool changeTextFieldStyle = false;
   bool checkIcon = false;
   bool showPass = false;
+  bool showPass1 = false;
   final myController = TextEditingController();
   final myPassController = TextEditingController();
   final myRePassController = TextEditingController();
+
+
+  void showPassword(int i){
+
+    switch(i){
+
+      case 1:
+         setState(() {
+                    if(!showPass ){
+                      showPass = true;
+                      
+                    }else{
+                      showPass =false;
+                    }
+                 
+                    
+                  });
+                  break;
+
+          case 2:
+         setState(() {
+                    if(!showPass1 ){
+                      showPass1 = true;
+                      
+                    }else{
+                      showPass1 =false;
+                    }
+                 
+                    
+                  });
+                  break;              
+
+    }
+
+
+  }
+
 
 Future<void> showMyDialog() async {
   return showDialog<void>(
@@ -88,7 +126,29 @@ Future<void> showMyDialog1() async {
 } 
 
 
+void validateInfo(){
 
+        setState(() {
+                    RegExp  emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[yahoo||gmail]+\.[com]+");
+                    bool match = emailValid.hasMatch(myController.text);
+                    
+                    if(!match || myController.text == null ){
+                       checkIcon = false;
+                       showMyDialog();
+                      }else{
+                        checkIcon = true;
+                    }
+                  
+                 myPassController.text != myRePassController.text ? showMyDialog1() : print('correct');
+
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) =>  Registration()),
+                  // );
+                });
+
+
+  }
 
 
 
@@ -107,171 +167,100 @@ Future<void> showMyDialog1() async {
       appBar: AppBar(title: Text("RoozShop App")),
       body:Center(
         
-        child: Column(
+        child: ListView(
         
          children:  <Widget>[
 
-            Padding(padding: EdgeInsets.all(20),child: Mywid(
+          Image.asset('assets/images/img4.png'),
+//           Image.network(  
+//   'https://picsum.photos/250?image=9',  
+// ) ,
+          
+          Padding(padding: EdgeInsets.only(left: 20,top: 10),child: Text("Email: ")),
+         
+
+            Padding(padding: EdgeInsets.fromLTRB(20,0,20,20),child: Mywid(
                       myControllers: myController,
                       myIcon: checkIcon ?  Icon(Icons.check) : null,
+                      obsPass: false,
+                       enaPass:false ,
+                      autoPass: false,
                     ),),
-        
-                     Padding(padding: EdgeInsets.all(20),child: Mywid(
+                  Padding(padding: EdgeInsets.only(left: 20,top: 10),child: Text("Password: ")),
+
+                     Padding(padding: EdgeInsets.fromLTRB(20,0,20,20),child: Mywid(
                       myControllers: myPassController,
-                      myIcon: checkIcon ?  Icon(Icons.check) : null,
+                      myIcon:  Icon(Icons.remove_red_eye),
+                     
                       obsPass: showPass ? true : false,
                       enaPass:showPass ? false : true ,
                       autoPass: showPass ? false : true,
+                      onTap:(){ 
+                        showPassword(1);
+                      
+                  },
+                    ),),
+
+          Padding(padding: EdgeInsets.only(left: 20,top: 10),child: Text("Repassword: ")),
+
+                      Padding(padding: EdgeInsets.fromLTRB(20,0,20,20),child: Mywid(
+                      myControllers: myRePassController,
+                      myIcon:  Icon(Icons.remove_red_eye),
+                     
+                      obsPass: showPass1 ? true : false,
+                      enaPass:showPass1 ? false : true ,
+                      autoPass: showPass1 ? false : true,
+                      onTap:(){ 
+                        showPassword(2);
+                      
+                  },
                     ),),
         
 
-        Padding(padding: EdgeInsets.all(20),
-            child:
-               TextField(
-                controller: myPassController,
-               
-
-
-
-                obscureText: showPass ? true : false,
-                enableSuggestions: showPass ? false : true,
-                  autocorrect: showPass ? false : true,
-              
-               
-                decoration:  InputDecoration(
-
-                  
-                       suffixIcon: Icon(Icons.remove_red_eye),
- 
-                       
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 192, 225, 249),
-                    focusedBorder: OutlineInputBorder(
-                    borderRadius:  BorderRadius.circular(12),
-                     borderSide: BorderSide(color: Color.fromARGB(255, 192, 225, 249), width: 0.5) ,
-                    
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                     borderRadius:  BorderRadius.circular(12),
-                     borderSide: BorderSide(color: Color.fromARGB(255, 192, 225, 249), width: 0.5) ,
-                    
-                  ),
-                
-                  
-                 
-               
-                ),
-                // onSubmitted: (String value){
-                //   debugPrint(value);
-                // },
-                
-                 onTap: (){
-                  setState(() {
-                    if(!showPass){
-                      showPass = true;
-                    }else{
-                      showPass =false;
-                    }
-                 
-                    
-                  });
-
-                 },          ),
-                           ),
-
-              Padding(padding: EdgeInsets.all(20),
-            child:
-               TextField(
-               controller: myRePassController,
-                decoration:  InputDecoration(
-                     suffixIcon: Icon(Icons.remove_red_eye),
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 192, 225, 249),
-                    focusedBorder: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(20),
-                                    
-                    borderRadius:  BorderRadius.circular(12),
-                     borderSide: BorderSide(color: Color.fromARGB(255, 192, 225, 249), width: 0.5) ,
-                    
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                     borderRadius:  BorderRadius.circular(12),
-                     borderSide: BorderSide(color: Color.fromARGB(255, 192, 225, 249), width: 0.5) ,
-                    
-                  ),
-                
-                  
-                  hintText: 'Enter your Repassword',
-               
-                ),
-                onSubmitted: (String value){
-                  debugPrint(value);
-                },
-                
-                ),),
-
-              ElevatedButton(onPressed: (){
-                setState(() {
-                  print(myController.text);
-
-                    RegExp  emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[yahoo||gmail]+\.[com]+");
-                    bool match = emailValid.hasMatch(myController.text);
-                    if(!match || myController.text==null ){
-                      //  changeTextFieldStyle = false;
-                       checkIcon = false;
-                       showMyDialog();
-                      
-                
-                    }else{
-                      print('object');
-                      // changeTextFieldStyle = true;
-                      checkIcon = true;
-
-                    }
-                  
-
-                    if(myPassController.text == myRePassController.text){
-                      print('eq');
-                    }else{
-                      print('not eq');
-                      showMyDialog1();
-                    }
-
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) =>  Registration()),
-                  // );
-                });
-                
-              }, child: Text('log in') ,),
 
               Row(children: <Widget>[
                 Padding(padding: EdgeInsets.all(20)),
                  Checkbox(  
-                    
-                     checkColor: Colors.greenAccent,  
-                      activeColor: Colors.red,  
+                      activeColor: Colors.blue,  
                       value: this.valuefirst,  
                       onChanged: (bool? value)  {  
                         setState(() {  
                           this.valuefirst = value!;  
                         });
                         } ),
-        
-                        
                         Text('I agree to the Terms & conditions \n and policy privacy'),
-                       
                         
+                      
 ],),
+          Padding(padding: EdgeInsets.fromLTRB(20,0,20,20),child:Container(
+              width: MediaQuery.of(context).size.width,
+              child:ElevatedButton(onPressed: (){
+                validateInfo();
+                 
+              }, child: Text('Create account') ,), ) ,),
 
-
-                
-             
-
-             
-
+                Padding(padding: EdgeInsets.fromLTRB(20,0,20,20),child:Container(
+              width: MediaQuery.of(context).size.width,
               
-
+              child:ElevatedButton(onPressed: (){
+                print('google');
+                 
+              }, child:Container(  alignment: Alignment.center , child:
+                // Row(children: [ 
+                // Icon(Icons.email),              
+              Text('Sign up with google') ,
+              // ],
+              // ),
+              ),
+                
+              ), 
+              )
+               ,),
+                Padding(padding: EdgeInsets.fromLTRB(100,0,20,20),child: Text('Already have an acount?Log in') ,)
+              ,
+                
+            
+              
          ],
 
         ),
